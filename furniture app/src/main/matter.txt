@@ -1,0 +1,314 @@
+You’re right to ask for the remaining classes. But before just dumping code, notice something important: **all product classes (Chair, Sofa, Bed, Locker, Almar)** have the *same behavior*. If every class only calls `super(...)`, it means they are just **type markers**. That’s okay for learning inheritance, but in real systems you might instead use a **category field**. For now, since your goal is practicing **OOP + packages**, we’ll keep them separate.
+
+Below are the **remaining files** for your package structure.
+
+---
+
+# 1. User Parent Class
+
+📦 `users/User.java`
+
+```java
+package users;
+
+public class User {
+
+    protected String username;
+    protected String password;
+
+    public User(String username,String password){
+        this.username = username;
+        this.password = password;
+    }
+
+    public String getUsername(){
+        return username;
+    }
+
+}
+```
+
+---
+
+# 2. Chair Class
+
+📦 `models/Chair.java`
+
+```java
+package models;
+
+public class Chair extends Furniture{
+
+    public Chair(String name,double price){
+        super(name,price);
+    }
+
+}
+```
+
+---
+
+# 3. Sofa Class
+
+📦 `models/Sofa.java`
+
+```java
+package models;
+
+public class Sofa extends Furniture{
+
+    public Sofa(String name,double price){
+        super(name,price);
+    }
+
+}
+```
+
+---
+
+# 4. Bed Class
+
+📦 `models/Bed.java`
+
+```java
+package models;
+
+public class Bed extends Furniture{
+
+    public Bed(String name,double price){
+        super(name,price);
+    }
+
+}
+```
+
+---
+
+# 5. Locker Class
+
+📦 `models/Locker.java`
+
+```java
+package models;
+
+public class Locker extends Furniture{
+
+    public Locker(String name,double price){
+        super(name,price);
+    }
+
+}
+```
+
+---
+
+# 6. Almar Class
+
+📦 `models/Almar.java`
+
+```java
+package models;
+
+public class Almar extends Furniture{
+
+    public Almar(String name,double price){
+        super(name,price);
+    }
+
+}
+```
+
+---
+
+# 7. Auth Service (Login / Signup Logic)
+
+📦 `services/AuthService.java`
+
+```java
+package services;
+
+import users.Customer;
+import java.util.*;
+
+public class AuthService {
+
+    List<Customer> customers = new ArrayList<>();
+
+    public Customer signup(String username,String password){
+
+        Customer c = new Customer(username,password);
+        customers.add(c);
+
+        System.out.println("Signup Successful");
+
+        return c;
+    }
+
+    public Customer login(String username,String password){
+
+        for(Customer c:customers){
+
+            if(c.getUsername().equals(username)){
+                System.out.println("Login Successful");
+                return c;
+            }
+        }
+
+        System.out.println("User not found");
+        return null;
+    }
+
+}
+```
+
+---
+
+# 8. Product Service (Store Products)
+
+📦 `services/ProductService.java`
+
+```java
+package services;
+
+import models.*;
+import java.util.*;
+
+public class ProductService {
+
+    List<Furniture> products = new ArrayList<>();
+
+    public ProductService(){
+
+        products.add(new Chair("Office Chair",3000));
+        products.add(new Chair("Gaming Chair",7000));
+
+        products.add(new Sofa("Luxury Sofa",15000));
+
+        products.add(new Bed("Single Bed",9000));
+        products.add(new Bed("Double Bed",16000));
+
+        products.add(new Locker("Single Door Locker",8000));
+        products.add(new Locker("Double Door Locker",12000));
+
+        products.add(new Almar("Wooden Almar",11000));
+
+    }
+
+    public void showProducts(){
+
+        int i=1;
+
+        for(Furniture f:products){
+            System.out.print(i+". ");
+            f.display();
+            i++;
+        }
+
+    }
+
+    public Furniture getProduct(int index){
+
+        if(index>0 && index<=products.size()){
+            return products.get(index-1);
+        }
+
+        return null;
+    }
+
+}
+```
+
+---
+
+# 9. Store Service (Category Display)
+
+📦 `services/StoreService.java`
+
+```java
+package services;
+
+public class StoreService {
+
+    public void showCategories(){
+
+        System.out.println("Furniture Categories");
+        System.out.println("1 Chairs");
+        System.out.println("2 Sofas");
+        System.out.println("3 Beds");
+        System.out.println("4 Lockers");
+        System.out.println("5 Almars");
+
+    }
+
+}
+```
+
+---
+
+# 10. Final Project Structure
+
+Your **complete project** should now look like this:
+
+```text
+FurnitureApp
+│
+├── main
+│     └── MainApp.java
+│
+├── interfaces
+│     └── Product.java
+│
+├── models
+│     ├── Furniture.java
+│     ├── Chair.java
+│     ├── Sofa.java
+│     ├── Bed.java
+│     ├── Locker.java
+│     └── Almar.java
+│
+├── users
+│     ├── User.java
+│     ├── Customer.java
+│     └── Admin.java
+│
+├── cart
+│     └── Cart.java
+│
+├── services
+│     ├── AuthService.java
+│     ├── ProductService.java
+│     └── StoreService.java
+│
+└── order
+      └── OrderService.java
+```
+
+---
+
+# 11. What This Project Demonstrates (Important for Resume)
+
+Your console project now includes:
+
+* **Interface usage**
+* **Abstract classes**
+* **Inheritance**
+* **Encapsulation**
+* **Packages**
+* **Role separation (Admin / Customer)**
+* **Cart system**
+* **Order system**
+
+That’s actually **strong enough for a Java fresher project**.
+
+---
+
+💡 If you want, I can also show you the **next-level version of this same project** with:
+
+* **Product IDs**
+* **Quantity in cart**
+* **Remove item**
+* **Admin add/delete product**
+* **Category filtering**
+* **Better menu UI**
+
+That version becomes a **much stronger interview project (around 700–900 lines of code)**.

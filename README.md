@@ -171,16 +171,7 @@ MainApp.java
 * Build REST APIs
 * Add frontend (React)
 * Implement JWT authentication
-
----
-
-# 💬 Interview Talking Points
-
-* Explain DAO pattern usage
-* Describe cart persistence logic
-* Explain order transaction workflow
-* Discuss database relationships
-
+  
 ---
 
 # 👨‍💻 Author

@@ -102,7 +102,7 @@ Database → MySQL Tables
 ## 1️⃣ Clone Repository
 
 ```bash
-git clone https://github.com/your-username/furniture-management-system.git
+git clone https://github.com/mothadaka-nani/furniture-management-system.git
 ```
 
 ---
